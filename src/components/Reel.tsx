@@ -33,12 +33,11 @@ export default function Reel({ symbol, spinning, stopKey, index }: ReelProps) {
   useEffect(() => {
     if (!spinning && stopKey) {
       let i = 0;
-      const steps = [120, 140, 170, 220];
       const stepper = () => {
         i++;
-        if (i < steps.length) {
+        if (i < 4) {
           setCurrent(pickSymbol());
-          window.setTimeout(stepper, steps[i]);
+          window.setTimeout(stepper);
         } else {
           setCurrent(stopKey);
         }
@@ -55,7 +54,7 @@ export default function Reel({ symbol, spinning, stopKey, index }: ReelProps) {
           initial={{ rotateX: 0, opacity: 0, scale: 0.9 }}
           animate={{ rotateX: 360, opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-5xl leading-none"
         >
           {current}

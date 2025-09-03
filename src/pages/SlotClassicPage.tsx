@@ -5,7 +5,6 @@ import {
   MIN_BET,
   PAYTABLE,
   REEL_COUNT,
-  SYMBOLS,
 } from "../utils/constants";
 import { pickSymbol } from "../utils/random";
 import Reel from "../components/Reel";
@@ -157,18 +156,18 @@ export default function SlotClassicPage() {
               Tabla de pagos (3 en línea / 2 iguales)
             </h3>
             <ul className="space-y-1">
-              {SYMBOLS.map((s) => (
+              {Object.entries(PAYTABLE).map(([symbol, payout]) => (
                 <li
-                  key={s}
+                  key={symbol}
                   className="flex items-center justify-between text-sm"
                 >
-                  <span className="text-xl">{s}</span>
+                  <span className="text-xl">{symbol}</span>
                   <span>
-                    x3: <b>{PAYTABLE[s]?.three ?? 0}</b>
-                    {PAYTABLE[s]?.two ? (
+                    x3: <b>{payout.three}</b>
+                    {payout.two ? (
                       <>
                         <span className="opacity-70"> · </span>
-                        x2: <b>{PAYTABLE[s]?.two}</b>
+                        x2: <b>{payout.two}</b>
                       </>
                     ) : null}
                   </span>
@@ -176,7 +175,6 @@ export default function SlotClassicPage() {
               ))}
             </ul>
           </div>
-
           <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4">
             <h3 className="font-bold mb-3">Historial</h3>
             <ul className="space-y-2 text-sm">
